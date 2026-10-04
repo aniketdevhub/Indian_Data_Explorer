@@ -9,10 +9,14 @@ df = pd.read_csv("India_census.csv")
 list_of_States = list(df["State"].unique())
 list_of_States.insert(0, "Overall India")
 
+selected_para = df.drop(
+    ["State", "District", "Latitude", "Longitude", "District code"], axis=1
+)
+
 st.sidebar.title("India Data Explorer")
 Selected_state = st.sidebar.selectbox("Select a State", list_of_States)
-primary = st.sidebar.selectbox("Select Primary Parameter", sorted(df))
-secondary = st.sidebar.selectbox("Select Seconday Paramter", sorted(df))
+primary = st.sidebar.selectbox("Select Primary Parameter", sorted(selected_para))
+secondary = st.sidebar.selectbox("Select Seconday Paramter", sorted(selected_para))
 
 
 plot = st.sidebar.button("Plot Graph")
